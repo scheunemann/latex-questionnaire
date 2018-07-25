@@ -1,0 +1,50 @@
+\documentclass{article}
+
+% personalise page geometry, e.g., margin,
+% for your printer and needs
+\usepackage[
+  a4paper,
+  left = 20mm,
+  top = 20mm,
+]{geometry}
+ 
+% switch off page numbering
+\pagenumbering{gobble}
+
+% use for generating tables 
+\usepackage{csvsimple}
+\csvstyle{GSscale}{
+  tabular=r|c|c|c|c|c|l, 
+  table head = 
+      & 1 & 2 & 3 & 4 & 5 &\\\hline, 
+  late after line = \\\hline,
+  head=false
+}
+
+% for circle box
+\usepackage{wasysym}
+
+% switch to sans serif
+\renewcommand{\familydefault}{\sfdefault}
+
+% factor for table padding
+\renewcommand{\arraystretch}{1.6}
+
+\begin{document}
+
+\section*{Questionnaire}
+Please rate your impression of the robot on these scales:%
+\begin{table}[h]
+  \centering
+    \csvreader[GSscale]{items.csv}{}%
+    {\csvcoli & $\ocircle$ & $\ocircle$ & $\ocircle$ & $\ocircle$ & $\ocircle$ & \csvcolii}%
+\end{table}
+
+Please rate your emotional state on these scales:
+\begin{table}[h]
+  \centering
+    \csvreader[GSscale]{items-estate.csv}{}%
+    {\csvcoli & $\ocircle$ & $\ocircle$ & $\ocircle$ & $\ocircle$ & $\ocircle$ & \csvcolii}%
+\end{table}
+
+\end{document}
