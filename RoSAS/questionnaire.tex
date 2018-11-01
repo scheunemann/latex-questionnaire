@@ -1,0 +1,44 @@
+\documentclass{article}
+
+% personalise page geometry, e.g., margin,
+% for your printer and needs
+\usepackage[
+  a4paper,
+  left = 20mm,
+  top = 20mm,
+]{geometry}
+ 
+% switch off page numbering
+\pagenumbering{gobble}
+
+% use for generating tables 
+\usepackage{csvsimple}
+\csvstyle{RSscale}{
+  tabular=r|c|c|c|c|c|c|c|, 
+  table head = 
+      & 1 & 2 & 3 & 4 & 5 & 6 & 7\\\hline, 
+  late after line = \\\hline,
+  head=false
+}
+
+% for circle box
+\usepackage{wasysym}
+
+% switch to sans serif
+\renewcommand{\familydefault}{\sfdefault}
+
+% factor for table padding
+\renewcommand{\arraystretch}{1.6}
+
+\begin{document}
+
+\section*{Questionnaire}
+Using the scale provided, how closely are the following attributes associated with the robot?%
+\begin{table}[h]
+  \centering
+    \csvreader[RSscale]{items.csv}{}%
+    {\csvcoli & $\ocircle$ & $\ocircle$ & $\ocircle$ & $\ocircle$ & $\ocircle$ & $\ocircle$ & $\ocircle$}%
+\end{table}
+
+
+\end{document}
