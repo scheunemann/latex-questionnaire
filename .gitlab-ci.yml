@@ -1,12 +1,14 @@
 image: niccokunzmann/ci-latex
 
-create questionnaires:
-  stage: deploy
+build:
+  stage: build
   script:
   - cd GodSpeed
   - pdflatex -interaction=nonstopmode -halt-on-error GodSpeed.tex
-  - cd RoSAS
+  - cd ../RoSAS
   - pdflatex -interaction=nonstopmode -halt-on-error RoSAS.tex
+  only:
+  - master
   artifacts:
     paths:
     - GodSpeed/GodSpeed.pdf
